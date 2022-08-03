@@ -54,5 +54,27 @@ inputs:
   extra:
     description: Any extra arguments to append to the back
 runs:
-  using: 'node12'
-  main: 'lib/main.js'
+  using: "composite"
+  steps:
+  - uses: actions/setup-python@v4
+    with:
+      python-version: '3.6.x - 3.11.x'
+
+  - uses: ./action_dir
+    with:
+      dir: ${{ inputs.dir }}
+      version: ${{ inputs.version }}
+      host: ${{ inputs.host }}
+      target: ${{ inputs.target }}
+      arch: ${{ inputs.arch }}
+      install-deps: ${{ inputs.install-deps }}
+      modules: ${{ inputs.modules }}
+      archives: ${{ inputs.archives }}
+      cache: ${{ inputs.cache }}
+      cache-key-prefix: ${{ inputs.cache-key-prefix }}
+      tools: ${{ inputs.tools }}
+      set-env: ${{ inputs.set-env }}
+      tools-only: ${{ inputs.tools-only }}
+      aqtversion: ${{ inputs.aqtversion }}
+      py7zrversion: ${{ inputs.py7zrversion }}
+      extra: ${{ inputs.extra }}
